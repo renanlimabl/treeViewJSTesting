@@ -1,4 +1,4 @@
-/* li > ul {
+li > ul {
   display: none;
 }
 
@@ -9,4 +9,4 @@ nav#tree li.has-children {
 
 li.open > ul {
   display: block;
-}  */
+} 

@@ -21,36 +21,42 @@ function Tree(data) {
 
 
 
-  // Verifica quais não tem pai, então são os "first level"
+  // Verifica quais não tem parent, então são os "first level"
   var firstLevels = data.filter(item => !item.parent)
   /**
    * console.log(firstLevels) = 
-   * { filho: 8, name: "Electronics", pai: null },
-   * { filho: 18, name: "Camping", pai: null },
+   * { id: 8, name: "Electronics", parent: null },
+   * { id: 18, name: "Camping", parent: null },
    */
 
+  var gerFirstLis = firstLevels.map(buildTree)
+  gerFirstLis.forEach(li => menuPrincipal.append(li))
 
-  firstLevels.forEach(item => {
+  function buildTree(item) {
     // PARA CADA LEVEL, VOU TER QUE CRIAR UM LI;
     var li = document.createElement('li')
-
     // ADICIONAR O TEXTO DE CADA FIRST LEVEL NA LI;
     li.innerHTML = item.name
 
-    // PROCURAREMOS OS FILHOS DOS ELEMENTOS PAIS.
+    // PROCURAREMOS OS FILHOS DOS ELEMENTOS parent.
     var filho = data.filter(child => child.parent === item.id)
-    filho.forEach(subfilho => {
+
+    if (filho.length > 0) {
+      li.addEventListener('click', function (event) {
+        event.stopPropagation()
+        event.target.classList.toggle('open')
+      })
+      li.classList.add('has-children')
       var subMenu = document.createElement('ul')
-      var li2 = document.createElement('li')
-      li2.innerHTML = subfilho.name;
-      subMenu.append(li2)
+      filho
+        .map(buildTree)
+        .forEach(li => subMenu.append(li))
       li.append(subMenu)
-    })
+    }
 
+    return li
+  }
 
-    // ADICIONA AO MEU PRINCIPAL O LI CRIADO.
-    menuPrincipal.append(li)
-  })
 
 
 
