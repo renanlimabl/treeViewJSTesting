@@ -9,7 +9,8 @@ const menu = [
   { id: 10, name: "TV", parent: 8 },
   { id: 20, name: '11 pol', parent: 7 },
   { id: 13, name: "Remotes", parent: 14 },
-  { id: 14, name: "Accessories", parent: 10 }
+  { id: 14, name: "Accessories", parent: 10 },
+  { id: 30, name: 'Mouse', parent: 18}
 ]
 
 function Tree(data) {
